@@ -1,6 +1,7 @@
 //ForwardList
 #include<iostream>
 using namespace std;
+#define tab "\t"
 
 class Element
 {
@@ -15,6 +16,7 @@ public:
 	{
 		cout << "EDestructor:\t" << this << endl;
 	}
+	friend class ForwardList;
 };
 
 class ForwardList
@@ -34,8 +36,26 @@ public:
 	//					Adding elements:
 	void push_front(int Data)
 	{
-		Head = new Element(Data);
+		Head = new Element(Data, Head);
+	}
+
+	void push_back(int Data)
+	{
+		Element* Temp = Head;
+		while (Temp->pNext)
+			Temp = Temp->pNext;
+		Temp->pNext = new Element(Data);
+	}
+	//					Methods:
+	void Print()const
+	{
+		Element* Temp = Head;// Temp итератор
 		
+		while (Temp)
+		{
+			cout << Temp << tab << Temp->Data << tab << Temp->pNext << endl;
+			Temp = Temp->pNext;
+		}
 	}
 };
 
@@ -50,5 +70,7 @@ void main()
 	{
 		list.push_front(rand() % 100);
 	}
+	list.push_back(123);
+	list.Print();
 	
 }
