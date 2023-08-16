@@ -1,7 +1,14 @@
 //ForwardList
 #include<iostream>
-using namespace std;
+//using namespace std;
+using std::cin;
+using std::cout;
+using std::endl;;
+
 #define tab "\t"
+
+class ForwardList;
+ForwardList operator+(const ForwardList& left, const ForwardList& right);
 
 class Element
 {
@@ -17,6 +24,7 @@ public:
 		cout << "EDestructor:\t" << this << endl;
 	}
 	friend class ForwardList;
+	friend ForwardList operator+(const ForwardList& left, const ForwardList& right);
 };
 
 class ForwardList
@@ -28,13 +36,21 @@ public:
 		Head = nullptr;//если список пуст его голова указывает на 0
 		cout << "LConstructor:\t" << this << endl;
 	}
-	ForwardList(const ForwardList& other)
+	ForwardList(const ForwardList& other) :ForwardList()
 	{
-		cout << "CopyConstructor: \t" << this << endl;
+		cout << "LCopyConstructor: \t" << this << endl;
 		//deepCopy:
-		for (Element* Temp = other.Head; Temp; Temp = Temp->pNext)
-			push_back(Temp->Data);
+		/*for (Element* Temp = other.Head; Temp; Temp = Temp->pNext)
+			push_back(Temp->Data);*/
+		*this = other;
 	}
+
+	ForwardList(ForwardList&& other)//ForwardList&& - r-values reference
+	{
+
+
+	}
+
 	~ForwardList()
 		{
 		while (Head)pop_front();
@@ -106,7 +122,7 @@ public:
 		delete erased;
 		
 	}
-
+	
 	//					Methods:
 	void Print()const
 	{
@@ -121,13 +137,22 @@ public:
 		for (Element* Temp = Head; Temp; Temp = Temp->pNext)
 			cout << Temp<< tab << Temp->Data << tab << Temp->pNext << endl;
 	}
-	
+	friend ForwardList operator+(const ForwardList& left, const ForwardList& right);
 };
 
+ForwardList operator+(const ForwardList& left, const ForwardList& right)
+{
+	ForwardList cat = left;
+	for (Element* Temp = right.Head; Temp; Temp = Temp->pNext)cat.push_back(Temp->Data);
+	return cat;
+}
 
+//#define base_check
+//#define operator_plus_check
 void main()
 {
 	setlocale(LC_ALL, "");
+#ifdef base_check
 	int n;
 	cout << "Введите размер списка: "; cin >> n;
 	ForwardList list;
@@ -157,4 +182,38 @@ void main()
 	ForwardList list2;
 	list2 = list;//copy assignment
 	list2.Print();
+#endif base_check;
+
+#ifdef operator_plus_check
+	ForwardList list1;
+	list1.push_back(3);
+	list1.push_back(5);
+	list1.push_back(8);
+	list1.push_back(13);
+	list1.push_back(21);
+	list1.Print();
+
+	ForwardList list2;
+	list2.push_back(34);
+	list2.push_back(55);
+	list2.push_back(89);
+	list2.Print();
+
+	ForwardList list3 = list1 + list2;
+	list3.Print();
+
+#endif operator_plus_check
+
+	int arr[] = { 3,5,8,13,21 };
+	for (int i = 0; i < sizeof(arr) / sizeof(arr[0]); i++)
+	{
+		cout << arr[i] << tab;
+	}
+	cout << endl;
+
+	for (int i : arr)
+	{
+		cout << i << tab;
+	}
+	cout << endl;
 }
