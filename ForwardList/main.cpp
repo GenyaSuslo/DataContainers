@@ -30,7 +30,8 @@ public:
 	}
 	~ForwardList()
 		{
-			cout << "LDestructor:\t" << this << endl;
+		while (Head)pop_front();
+		cout << "LDestructor:\t" << this << endl;
 		}
 
 	//					Adding elements:
@@ -41,11 +42,56 @@ public:
 
 	void push_back(int Data)
 	{
+		if (Head == nullptr)return push_front(Data);
 		Element* Temp = Head;
 		while (Temp->pNext)
 			Temp = Temp->pNext;
 		Temp->pNext = new Element(Data);
 	}
+
+	//					Delete Elements:
+	void pop_front()
+	{
+		Element* erased = Head;
+		Head = Head->pNext;
+		delete erased;
+	}
+	void pop_back()
+	{
+		Element* Temp = Head;
+		while (Temp->pNext->pNext)Temp = Temp->pNext;
+		delete Temp->pNext;
+		Temp->pNext = nullptr;
+	}
+	void insert(int Data, int Index)
+	{
+		if (Index == 0)return push_front(Data);
+		Element* Temp = Head;
+		for (int i = 0; i < Index-1; i++)
+			if(Temp->pNext)
+				Temp = Temp->pNext;
+		//1)создаем новый элемент
+		Element* New = new Element(Data);
+		//2)
+		New->pNext = Temp->pNext;
+		//3)
+		Temp->pNext = New;
+	}
+	void erase(int Index)
+	{
+		if (Index == 0)return pop_back();
+		Element* Temp = Head;
+		for (int i = 0; i < Index - 1; i++)
+			if (Temp ->pNext);
+				Temp = Temp->pNext;
+		Element* erased = Temp->pNext;
+		Temp->pNext = Temp->pNext->pNext;
+		delete erased;
+		
+	}
+
+
+
 	//					Methods:
 	void Print()const
 	{
@@ -68,9 +114,24 @@ void main()
 	ForwardList list;
 	for (int i = 0; i < n; i++)
 	{
-		list.push_front(rand() % 100);
+		//list.push_front(rand() % 100);
+		list.push_back(rand() % 100);
 	}
-	list.push_back(123);
+	//list.push_back(123);
+	list.Print();
+	/*list.pop_front();
+	list.pop_back();
+	list.Print();*/
+	int value;
+	int index;
+	cout << "введите индекс элемента: "; cin >> index;
+	cout << "введите значение элемента: "; cin >> value;
+	
+	list.insert(value, index);
+	list.Print();
+
+	cout << "введите индекс элемента: "; cin >> index;
+	list.erase(index);
 	list.Print();
 	
 }
