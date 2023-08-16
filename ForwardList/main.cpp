@@ -149,6 +149,7 @@ ForwardList operator+(const ForwardList& left, const ForwardList& right)
 
 //#define base_check
 //#define operator_plus_check
+//#define range_base_for_array
 void main()
 {
 	setlocale(LC_ALL, "");
@@ -204,6 +205,8 @@ void main()
 
 #endif operator_plus_check
 
+#ifdef range_base_for_array
+
 	int arr[] = { 3,5,8,13,21 };
 	for (int i = 0; i < sizeof(arr) / sizeof(arr[0]); i++)
 	{
@@ -216,4 +219,6 @@ void main()
 		cout << i << tab;
 	}
 	cout << endl;
+#endif range_base_for_array
+
 }
