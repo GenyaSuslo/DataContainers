@@ -28,12 +28,29 @@ public:
 		Head = nullptr;//если список пуст его голова указывает на 0
 		cout << "LConstructor:\t" << this << endl;
 	}
+	ForwardList(const ForwardList& other)
+	{
+		cout << "CopyConstructor: \t" << this << endl;
+		//deepCopy:
+		for (Element* Temp = other.Head; Temp; Temp = Temp->pNext)
+			push_back(Temp->Data);
+	}
 	~ForwardList()
 		{
 		while (Head)pop_front();
 		cout << "LDestructor:\t" << this << endl;
 		}
-
+	//					Operators:
+	ForwardList& operator=(const ForwardList& other)
+	{
+		if (this == &other)return *this;
+		while (Head)pop_front();
+		cout << "LCopyAssignment: \t" << this << endl;
+		//Deep copy:
+		for (Element* Temp = other.Head; Temp; Temp = Temp->pNext)
+			push_back(Temp->Data);
+		return *this;
+	}
 	//					Adding elements:
 	void push_front(int Data)
 	{
@@ -90,19 +107,21 @@ public:
 		
 	}
 
-
-
 	//					Methods:
 	void Print()const
 	{
-		Element* Temp = Head;// Temp итератор
-		
-		while (Temp)
-		{
-			cout << Temp << tab << Temp->Data << tab << Temp->pNext << endl;
-			Temp = Temp->pNext;
-		}
+		//Element* Temp = Head;// Temp итератор
+		//
+		//while (Temp)
+		//{
+		//	cout << Temp << tab << Temp->Data << tab << Temp->pNext << endl;
+		//	Temp = Temp->pNext;
+		//}
+		cout << "Head: " << Head << endl;
+		for (Element* Temp = Head; Temp; Temp = Temp->pNext)
+			cout << Temp<< tab << Temp->Data << tab << Temp->pNext << endl;
 	}
+	
 };
 
 
@@ -118,11 +137,12 @@ void main()
 		list.push_back(rand() % 100);
 	}
 	//list.push_back(123);
+	list = list;
 	list.Print();
 	/*list.pop_front();
 	list.pop_back();
 	list.Print();*/
-	int value;
+	/*int value;
 	int index;
 	cout << "введите индекс элемента: "; cin >> index;
 	cout << "введите значение элемента: "; cin >> value;
@@ -132,6 +152,9 @@ void main()
 
 	cout << "введите индекс элемента: "; cin >> index;
 	list.erase(index);
-	list.Print();
-	
+	list.Print();*/
+	//ForwardList list2 = list;//CopyConstructor
+	ForwardList list2;
+	list2 = list;//copy assignment
+	list2.Print();
 }
