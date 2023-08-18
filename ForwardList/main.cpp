@@ -6,6 +6,7 @@ using std::cout;
 using std::endl;;
 
 #define tab "\t"
+#define delimeter "\n-----------------------------"
 
 class ForwardList;
 ForwardList operator+(const ForwardList& left, const ForwardList& right);
@@ -97,10 +98,12 @@ public:
 		*this = other;
 	}
 
-	ForwardList(ForwardList&& other)//ForwardList&& - r-values reference
+	ForwardList(ForwardList&& other):ForwardList()//ForwardList&& - r-values reference
 	{
-
-
+		/*this->Head = other.Head;
+		other.Head = nullptr;*/
+		*this = std::move(other);
+		cout << "FMoveConstructor: \t" << this << endl;
 	}
 
 	~ForwardList()
@@ -117,6 +120,14 @@ public:
 		//Deep copy:
 		for (Element* Temp = other.Head; Temp; Temp = Temp->pNext)
 			push_back(Temp->Data);
+		return *this;
+	}
+	ForwardList& operator=(ForwardList&& other)
+	{
+		while (Head)pop_front();
+		this->Head = other.Head;
+		other.Head = nullptr;
+		cout << "LMoveAssigment: \t"<< this << endl;
 		return *this;
 	}
 	//					Adding elements:
@@ -201,8 +212,9 @@ ForwardList operator+(const ForwardList& left, const ForwardList& right)
 
 //#define BASE_CHECK
 //#define OPERATOR_PLUS_CHECK
-#define RANGE_BASE_FOR_ARRAY 
-#define RANGE_BASE_FOR_LIST
+//#define RANGE_BASE_FOR_ARRAY 
+//#define RANGE_BASE_FOR_LIST
+#define MOVE_SEMANTIC_CHECK
 void main()
 {
 	setlocale(LC_ALL, "");
@@ -287,6 +299,23 @@ void main()
 	cout << endl;
 #endif  RANGE_BASE_FOR_LIST
 
+#ifdef MOVE_SEMANTIC_CHECK
+
+	ForwardList list1 = { 3,5,8,13,21 };
+	for (int i : list1)cout << i << tab; cout << endl;
+
+	ForwardList list2 = { 34,55,89 };
+	for (int i : list2)cout << i << tab; cout << endl;
+
+	cout << delimeter << endl;
+	ForwardList list3 = list1 + list2;//MoveConstructor
+	cout<<delimeter<<endl;
+	for (int i : list3)cout << i << tab; cout << endl;
+
+
+#endif  MOVE_SEMANTIC_CHECK
+
+	
 
 
 }
