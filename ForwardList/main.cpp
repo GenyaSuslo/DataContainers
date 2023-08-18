@@ -102,7 +102,7 @@ public:
 	{
 		/*this->Head = other.Head;
 		other.Head = nullptr;*/
-		*this = std::move(other);
+		*this = std::move(other);//функция move() принудит.вызывает MoveAssigment для объекта
 		cout << "FMoveConstructor: \t" << this << endl;
 	}
 
