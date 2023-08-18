@@ -1,4 +1,4 @@
-//ForwardList
+п»ї//ForwardList
 #include<iostream>
 //using namespace std;
 using std::cin;
@@ -12,8 +12,8 @@ ForwardList operator+(const ForwardList& left, const ForwardList& right);
 
 class Element
 {
-	int Data; //значение
-	Element* pNext;//адрес следующего элемента
+	int Data; //Р·РЅР°С‡РµРЅРёРµ
+	Element* pNext;//Р°РґСЂРµСЃ СЃР»РµРґСѓСЋС‰РµРіРѕ СЌР»РµРјРµРЅС‚Р°
 public:
 	Element(int Data, Element* pNext = nullptr) :Data(Data), pNext(pNext)
 	{
@@ -25,16 +25,68 @@ public:
 	}
 	friend class ForwardList;
 	friend ForwardList operator+(const ForwardList& left, const ForwardList& right);
+	friend class Iterator;
 };
-
+class Iterator
+{
+	Element* Temp;
+public:
+	Iterator(Element* Temp = nullptr) :Temp(Temp)
+	{
+		cout << "ItConstructor: \t" << this << endl;
+	}
+	~Iterator()
+	{
+		cout << "ItDestructor: \t" << this << endl;
+	}
+	Iterator& operator++()
+	{
+		Temp = Temp->pNext;
+		return *this;
+	}
+	bool operator==(const Iterator& other)const
+	{
+		return this->Temp == other.Temp;
+	}
+	bool operator!=(const Iterator& other)const
+	{
+		return this->Temp != other.Temp;
+	}
+	int operator *()
+	{
+		return Temp->Data;
+	}
+	
+};
 class ForwardList
 {
-	Element* Head;//содержит адрес начального элемента списка
+	Element* Head;//СЃРѕРґРµСЂР¶РёС‚ Р°РґСЂРµСЃ РЅР°С‡Р°Р»СЊРЅРѕРіРѕ СЌР»РµРјРµРЅС‚Р° СЃРїРёСЃРєР°
 public:
+	Iterator begin()
+	{
+		return Head;
+	}
+	Iterator end()
+	{
+		return nullptr;
+	}
 	ForwardList()
 	{
-		Head = nullptr;//если список пуст его голова указывает на 0
+		Head = nullptr;//РµСЃР»Рё СЃРїРёСЃРѕРє РїСѓСЃС‚ РµРіРѕ РіРѕР»РѕРІР° СѓРєР°Р·С‹РІР°РµС‚ РЅР° 0
 		cout << "LConstructor:\t" << this << endl;
+	}
+	ForwardList(const std::initializer_list<int>& il):ForwardList()
+	{
+
+		//begin() - РІРѕР·РІСЂР°С‰Р°РµС‚ Р·РЅР°С‡РµРЅРёРµ РІ РЅР°С‡Р°Р»Рѕ РєРѕРЅС‚РµР№РЅРµСЂР°
+		//end() - РІРѕР·РІСЂР°С‰Р°РµС‚ РёС‚РµСЂР°С‚РѕСЂ РЅР° РєРѕРЅРµС† РєРѕРЅС‚РµР№РЅРµСЂР°
+
+		cout<<typeid(il.begin()).name() << endl;
+		for (int const* it = il.begin(); it != il.end(); it++)
+		{
+			push_back(*it);
+		}
+
 	}
 	ForwardList(const ForwardList& other) :ForwardList()
 	{
@@ -103,7 +155,7 @@ public:
 		for (int i = 0; i < Index-1; i++)
 			if(Temp->pNext)
 				Temp = Temp->pNext;
-		//1)создаем новый элемент
+		//1)СЃРѕР·РґР°РµРј РЅРѕРІС‹Р№ СЌР»РµРјРµРЅС‚
 		Element* New = new Element(Data);
 		//2)
 		New->pNext = Temp->pNext;
@@ -126,7 +178,7 @@ public:
 	//					Methods:
 	void Print()const
 	{
-		//Element* Temp = Head;// Temp итератор
+		//Element* Temp = Head;// Temp РёС‚РµСЂР°С‚РѕСЂ
 		//
 		//while (Temp)
 		//{
@@ -147,15 +199,16 @@ ForwardList operator+(const ForwardList& left, const ForwardList& right)
 	return cat;
 }
 
-//#define base_check
-//#define operator_plus_check
-//#define range_base_for_array
+//#define BASE_CHECK
+//#define OPERATOR_PLUS_CHECK
+#define RANGE_BASE_FOR_ARRAY 
+#define RANGE_BASE_FOR_LIST
 void main()
 {
 	setlocale(LC_ALL, "");
-#ifdef base_check
+#ifdef BASE_CHECK
 	int n;
-	cout << "Введите размер списка: "; cin >> n;
+	cout << "Р’РІРµРґРёС‚Рµ СЂР°Р·РјРµСЂ СЃРїРёСЃРєР°: "; cin >> n;
 	ForwardList list;
 	for (int i = 0; i < n; i++)
 	{
@@ -170,22 +223,22 @@ void main()
 	list.Print();*/
 	/*int value;
 	int index;
-	cout << "введите индекс элемента: "; cin >> index;
-	cout << "введите значение элемента: "; cin >> value;
+	cout << "РІРІРµРґРёС‚Рµ РёРЅРґРµРєСЃ СЌР»РµРјРµРЅС‚Р°: "; cin >> index;
+	cout << "РІРІРµРґРёС‚Рµ Р·РЅР°С‡РµРЅРёРµ СЌР»РµРјРµРЅС‚Р°: "; cin >> value;
 	
 	list.insert(value, index);
 	list.Print();
 
-	cout << "введите индекс элемента: "; cin >> index;
+	cout << "РІРІРµРґРёС‚Рµ РёРЅРґРµРєСЃ СЌР»РµРјРµРЅС‚Р°: "; cin >> index;
 	list.erase(index);
 	list.Print();*/
 	//ForwardList list2 = list;//CopyConstructor
 	ForwardList list2;
 	list2 = list;//copy assignment
 	list2.Print();
-#endif base_check;
+#endif BASE_CHECK;
 
-#ifdef operator_plus_check
+#ifdef OPERATOR_PLUS_CHECK
 	ForwardList list1;
 	list1.push_back(3);
 	list1.push_back(5);
@@ -203,9 +256,9 @@ void main()
 	ForwardList list3 = list1 + list2;
 	list3.Print();
 
-#endif operator_plus_check
+#endif OPERATOR_PLUS_CHECK
 
-#ifdef range_base_for_array
+#ifdef RANGE_BASE_FOR_ARRAY
 
 	int arr[] = { 3,5,8,13,21 };
 	for (int i = 0; i < sizeof(arr) / sizeof(arr[0]); i++)
@@ -214,11 +267,26 @@ void main()
 	}
 	cout << endl;
 
+	
 	for (int i : arr)
 	{
 		cout << i << tab;
 	}
 	cout << endl;
+
+	
 #endif range_base_for_array
+
+#ifdef  RANGE_BASE_FOR_LIST
+	ForwardList list = { 3,5,8,13,21 };
+	list.Print();
+	for (int i : list)
+	{
+		cout << i << tab;
+	}
+	cout << endl;
+#endif  RANGE_BASE_FOR_LIST
+
+
 
 }
