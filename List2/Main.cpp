@@ -72,7 +72,10 @@ public:
 	}
 	ForwardList(const std::initializer_list<int>& il) : ForwardList()
 	{
-		cout << typeid(il.begin()).name() << endl;
+		for (int const* it = il.begin(); it != il.end(); it++)
+		{
+			push_back(*it);
+		}
 	}
 
 	//					Operators
@@ -88,11 +91,14 @@ public:
 		//нужна какая то проверка чтоб не записывался всегда 1 элемент
 		
 		Head = new Element(Data, Head);
-		if (Tail=nullptr)Tail = new Element(Data, Tail);
+		if (Tail = nullptr)Tail = Head;
+		//else Tail = new Element(Data, Tail);
 	}
 	void push_back(int Data)
 	{
-
+		Tail = new Element(Data, Tail);
+		if (Head = nullptr)Head = Tail;
+		//else Head = new Element(Data, Tail);
 	}
 
 
