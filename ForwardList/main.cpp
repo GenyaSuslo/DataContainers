@@ -82,7 +82,7 @@ public:
 		//begin() - возвращает значение в начало контейнера
 		//end() - возвращает итератор на конец контейнера
 
-		cout<<typeid(il.begin()).name() << endl;
+		cout<<typeid(il.begin()).name() << endl;//узнаем тип данных объекта il.begin()
 		for (int const* it = il.begin(); it != il.end(); it++)
 		{
 			push_back(*it);
