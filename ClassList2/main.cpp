@@ -162,6 +162,7 @@ void main()
 	
 	List list1 = { 3,5,8,13,21 };
 	list1.print();
+	for (int i : list)cout << i << tab; cout << endl;
 
 
 }
