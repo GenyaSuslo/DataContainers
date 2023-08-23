@@ -1,4 +1,4 @@
-#include<iostream>
+ï»¿#include<iostream>
 using namespace std;
 #define tab "\t"
 #define delimeter "\n----------------------------------------------------------\n"
@@ -19,7 +19,7 @@ class List
 			cout << "EDestructor: \t" << this << endl;
 		}
 		friend class List;
-	}*Head, *Tail;//ñþäà ìîæíî âïèñûâàòü ñîçäàâàåìûå îáúåêòû êëàññà
+	}*Head, *Tail;//ÑÑŽÐ´Ð° Ð¼Ð¾Ð¶Ð½Ð¾ Ð²Ð¿Ð¸ÑÑ‹Ð²Ð°Ñ‚ÑŒ ÑÐ¾Ð·Ð´Ð°Ð²Ð°ÐµÐ¼Ñ‹Ðµ Ð¾Ð±ÑŠÐµÐºÑ‚Ñ‹ ÐºÐ»Ð°ÑÑÐ°
 	//Element* Head;
 	//Element* Tail
 	unsigned int size;
@@ -52,7 +52,7 @@ class List
 public:
 	class ConstIterator :public ConstBaseIterator
 	{
-		//Element* Temp; îíà îáúÿâëåíà â áàçîâîì êëàññå
+		//Element* Temp; Ð¾Ð½Ð° Ð¾Ð±ÑŠÑÐ²Ð»ÐµÐ½Ð° Ð² Ð±Ð°Ð·Ð¾Ð²Ð¾Ð¼ ÐºÐ»Ð°ÑÑÐµ
 	public:
 		ConstIterator(Element* Temp = nullptr) :ConstBaseIterator(Temp)
 		{
@@ -84,7 +84,7 @@ public:
 			Temp = Temp->pPrev;
 			return old;
 		}
-		//ýòî óæå åñòü â áàçîâîì êëàññå
+		//ÑÑ‚Ð¾ ÑƒÐ¶Ðµ ÐµÑÑ‚ÑŒ Ð² Ð±Ð°Ð·Ð¾Ð²Ð¾Ð¼ ÐºÐ»Ð°ÑÑÐµ
 		/*bool operator==(const Iterator& other)const
 		{
 			return this->Temp == other.Temp;
@@ -136,7 +136,7 @@ public:
 			Temp = Temp->pNext;
 			return old;
 		}
-		//ýòî óæå åñòü â áàçîâîì êëàññå
+		//ÑÑ‚Ð¾ ÑƒÐ¶Ðµ ÐµÑÑ‚ÑŒ Ð² Ð±Ð°Ð·Ð¾Ð²Ð¾Ð¼ ÐºÐ»Ð°ÑÑÐµ
 		/*bool operator==(const ReversIterator& other) const
 			{
 			return this->Temp == other.Temp;
@@ -186,15 +186,30 @@ public:
 	{
 		return nullptr;
 	}
-	ConstReversIterator crbegin()
+	ConstReversIterator crbegin()const
 	{
 		return Tail;
 	}
-	ConstReversIterator crend()
+	ConstReversIterator crend()const
 	{
 		return nullptr;
 	}
-
+	Iterator begin()
+		{
+			return Head;
+		}
+	Iterator end()
+	{
+		return nullptr;
+	}
+	ReversIterator begin()
+	{
+		return Tail;
+	}
+	ReversIterator end()
+	{
+		return nullptr;
+	}
 	List()
 	{
 		Head = Tail = nullptr;
@@ -321,7 +336,7 @@ void main()
 	setlocale(LC_ALL, "");
 #ifdef BASE_CHECK
 	int n;
-	cout << "ââåäèòå ðàçìåð ñïèñêà:"; cin >> n;
+	cout << "Ð²Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ñ€Ð°Ð·Ð¼ÐµÑ€ ÑÐ¿Ð¸ÑÐºÐ°:"; cin >> n;
 	List list;
 	for (int i = 0; i < n; i++)
 	{
@@ -333,8 +348,8 @@ void main()
 	//list.push_back(rand() % 100);
 	int Index;
 	int Value;
-	cout << "ââåäèòå èíäåêñ äîáàâëÿåìîãî ýëåìåíòà:"; cin >> Index;
-	cout << "ââåäèòå çíà÷åíèå äîáàâëÿåìîãî ýëåìåíòà:"; cin >> Value;
+	cout << "Ð²Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¸Ð½Ð´ÐµÐºÑ Ð´Ð¾Ð±Ð°Ð²Ð»ÑÐµÐ¼Ð¾Ð³Ð¾ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð°:"; cin >> Index;
+	cout << "Ð²Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ðµ Ð´Ð¾Ð±Ð°Ð²Ð»ÑÐµÐ¼Ð¾Ð³Ð¾ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð°:"; cin >> Value;
 	list.insert(Value, Index);
 	list.print();
 	cout << delimeter << endl;
