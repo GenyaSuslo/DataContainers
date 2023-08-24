@@ -222,12 +222,27 @@ public:
 			push_back(*it);
 		}
 	}
+	List(const List& other):List()
+	{
+		*this = other;
+		cout << "LCopyConstructor:\t" << this << endl;
+	}
 	~List()
 	{
 		//while (Head)pop_front();
 		while (Tail)pop_back();
 		cout << "LDestructor: \t" << this << endl;
 	}
+	//					Operators:
+	List& opertaor = (const List & other)
+	{
+		if (this == other)return
+		while (Head)pop_front();
+	for (Element* Temp = other.Head; Temp; Temp = Temp->pNext)push_back(Temp->Data);
+	cout << "LCopyAssignment:\t" << this << endl;
+	return *this;
+	}
+
 
 	//					Adding Elements:
 	void push_front(int Data)
@@ -322,7 +337,7 @@ public:
 List operator+(const List& left, const List& right)
 {
 	List cat = left;
-	for (List::ConstIterator it = right.begin() != right.end(); ++it)
+	for (List::ConstIterator it = right.begin(); it != right.end(); ++it)
 	{
 		(*it) *= 10;
 		cat.push_back(*it);
