@@ -1,5 +1,18 @@
 #include"ClassList2.h"
 
+template <typename T>T& List<T>::Iterator::operator*()
+{
+	return ConstBaseIterator::Temp->Data;
+}
+template <typename T>T& List<T>::ReversIterator::operator*()
+{
+	return ConstBaseIterator::Temp->Data;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//											List methods
+
 template<typename T>typename List<T>::ConstIterator List<T>::cbegin()const
 {
 	return Head;
@@ -16,6 +29,8 @@ template<typename T>typename List<T>::ConstReversIterator List<T>::crend()const
 {
 	return nullptr;
 }
+/////////////////////////////////////////////////////////////////////////////
+//						Iterators methods
 template<typename T>typename List<T>::Iterator List<T>::begin()
 {
 	return Head;
@@ -24,6 +39,12 @@ template<typename T>typename List<T>::Iterator List<T>::end()
 {
 	return nullptr;
 }
+//						Iterators methods
+/////////////////////////////////////////////////////////////////////////////
+// 
+/////////////////////////////////////////////////////////////////////////////
+//						ReverseIterators methods
+
 template<typename T>typename List<T>::ReversIterator List<T>::rbegin()
 {
 	return Tail;
@@ -32,6 +53,9 @@ template<typename T>typename List<T>::ReversIterator List<T>::rend()
 {
 	return nullptr;
 }
+//						ReverseIterators methods
+/////////////////////////////////////////////////////////////////////////////
+
 
 
 template<typename T> List<T>::List()
@@ -170,3 +194,6 @@ template<typename T>List<T> operator+(const List<T>& left, const List<T>& right)
 	}
 	return cat;
 }
+
+//											List methods
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////

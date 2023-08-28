@@ -191,10 +191,7 @@ public:
 #endif // DEBUG
 
 		}
-		T& operator*()
-		{
-			return ConstBaseIterator::Temp->Data;
-		}
+		T& operator*();
 	};
 	class ReversIterator :public ConstReversIterator
 	{
@@ -206,10 +203,7 @@ public:
 #endif // DEBUG
 
 		}
-		T& operator*()
-		{
-			return ConstBaseIterator::Temp->Data;
-		}
+		T& operator*();
 	};
 	ConstIterator cbegin()const;
 	ConstIterator cend()const;
@@ -240,5 +234,8 @@ public:
 	void print() const;
 	void reverse_print()const;
 };
+
+//////////////////////////////////////////////////////////////////////////////////
+//////////////////////////		List Methods		//////////////////////////////////////
 
 template<typename T>List<T> operator+(const List<T>& left, const List<T>& right);
