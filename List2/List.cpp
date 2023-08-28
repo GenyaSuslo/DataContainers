@@ -1,20 +1,9 @@
 #include "List.h"
 
-///////////////////////////////////////////////////////////////////////////////////////////////
-//									Iterator methods										 //
 
-template<typename T>T& List<T>::Iterator::operator*()
-{
-	return ConstBaseIterator::Temp->Data;
-}
-
-//									Iterator methods										 //
-///////////////////////////////////////////////////////////////////////////////////////////////
-
-///-----------------------------------------------------------------------------------------///
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
-//								ReverseIterator methods										 //
+//								Element methods										 //
 
 template<typename T>List<T>::Element::Element(T Data, Element* pNext, Element* pPrev) :Data(Data), pNext(pNext), pPrev(pPrev)
 {
@@ -28,6 +17,11 @@ template<typename T>List<T>::Element::~Element()
 	cout << "EDestructor:\t" << this << endl;
 #endif // DEBUG
 }
+//								Elements methods
+//////////////////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////////////////////
+//								ConstBaseIterator methods
 
 template<typename T> List<T>::ConstBaseIterator::ConstBaseIterator(Element* Temp) :Temp(Temp)
 {
@@ -55,6 +49,11 @@ template<typename T> const T& List<T>::ConstBaseIterator::operator*()const
 	return Temp->Data;
 }
 
+//								ConstBaseIterator methods
+/////////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+//									Iterator methods										 //
 template <typename T>List<T>::ConstIterator::ConstIterator(Element* Temp) :ConstBaseIterator(Temp)
 {
 #ifdef DEBUG
@@ -90,6 +89,19 @@ template<typename T>typename List<T>::ConstIterator List<T>::ConstIterator:: ope
 	ConstBaseIterator::Temp = ConstBaseIterator::Temp->pPrev;
 	return old;
 }
+
+template<typename T>T& List<T>::Iterator::operator*()
+{
+	return ConstBaseIterator::Temp->Data;
+}
+
+//									Iterator methods										 //
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+///-----------------------------------------------------------------------------------------///
+
+//////////////////////////////////////////////////////////////////////////////////////
+//									Reverseiterator methods
 
 template<typename T>List<T>::ConstReverseIterator::ConstReverseIterator(Element* Temp) :ConstBaseIterator(Temp)
 {
