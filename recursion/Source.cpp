@@ -2,6 +2,7 @@
 using namespace std;
 
 void elevator(int floor);
+double Power(double a, int n);
 
 void main()
 {
@@ -10,10 +11,13 @@ void main()
 
 	//cout << "Hello World";
 	//main();
-	int n;
+	/*int n;
 	cout << "введите номер этажа"; cin >> n;
-	elevator(n);
-
+	elevator(n);*/
+	double a; int n;
+	cout << "введите число: "; cin>>a;
+	cout << "введите степень: "; cin>>n;
+	Power(a, n);
 }
 void elevator(int floor)
 {
@@ -26,4 +30,11 @@ void elevator(int floor)
 	elevator(floor-1);
 	cout << "Вы на " << floor << " этаже\n";
 
+}
+double Power(double a, int n)
+{
+	if (n == 0)
+		return a;
+	Power(a * a, n - 1);
+	cout << a << endl;
 }
