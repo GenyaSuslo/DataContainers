@@ -1,4 +1,4 @@
-#include<iostream>
+ï»¿#include<iostream>
 using namespace std;
 
 void elevator(int floor);
@@ -13,26 +13,26 @@ void main()
 	//cout << "Hello World";
 	//main();
 	/*int n;
-	cout << "ââåäèòå íîìåð ýòàæà"; cin >> n;
+	cout << "Ð²Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð½Ð¾Ð¼ÐµÑ€ ÑÑ‚Ð°Ð¶Ð°"; cin >> n;
 	elevator(n);*/
 	double a; int n;
-	cout << "ââåäèòå ÷èñëî: "; cin>>a;
-	cout << "ââåäèòå ñòåïåíü: "; cin>>n;
+	cout << "Ð²Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ñ‡Ð¸ÑÐ»Ð¾: "; cin>>a;
+	cout << "Ð²Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÑÑ‚ÐµÐ¿ÐµÐ½ÑŒ: "; cin>>n;
 	cout<<Power(a, n);
 	int c;
-	cout << endl << "ââåäèòå ÷èñëî äëÿ âû÷èñëåíèÿ ôàêòîðèàëà: "; cin >> c;
+	cout << endl << "Ð²Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ñ‡Ð¸ÑÐ»Ð¾ Ð´Ð»Ñ Ð²Ñ‹Ñ‡Ð¸ÑÐ»ÐµÐ½Ð¸Ñ Ñ„Ð°ÐºÑ‚Ð¾Ñ€Ð¸Ð°Ð»Ð°: "; cin >> c;
 	cout << factorial(c);
 }
 void elevator(int floor)
 {
 	if (floor == 0)
 	{
-		cout << "Âû â ïîäâàëå" << endl;
+		cout << "Ð’Ñ‹ Ð² Ð¿Ð¾Ð´Ð²Ð°Ð»Ðµ" << endl;
 		return;
 	}
-	cout << "Âû íà " << floor << " ýòàæå\n";
+	cout << "Ð’Ñ‹ Ð½Ð° " << floor << " ÑÑ‚Ð°Ð¶Ðµ\n";
 	elevator(floor-1);
-	cout << "Âû íà " << floor << " ýòàæå\n";
+	cout << "Ð’Ñ‹ Ð½Ð° " << floor << " ÑÑ‚Ð°Ð¶Ðµ\n";
 
 }
 double Power(double a, int n)
@@ -44,9 +44,9 @@ double Power(double a, int n)
 }
 int factorial(int n)
 {
+	cout << n << "\t";
 	if (n == 0)
 		return 1;
-	cout << n << "\t";
-	/*else*/ return factorial(n - 1) * n;
+	else return factorial(n - 1) * n;
 	
 }
