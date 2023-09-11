@@ -213,8 +213,9 @@ private:
 		//depth - заданная глубина
 		if (Root == nullptr)
 		{
-			if (depth == 0)cout.width(width * pow(2, (this->depth() - depth) / 3));//cout.width(width)
-			cout << " ";
+			if (depth == 1)cout.width(width * 4);//cout.width(width)
+			if (depth == 0)cout.width(width * 2);//cout.width(width)
+			cout << "";
 			return;
 		}
 		if (depth==0)
@@ -246,6 +247,7 @@ private:
 	{
 		if (Root == nullptr)return;
 		if (abs(Count(Root->pLeft) - Count(Root->pRight))<2)return;
+
 		if (Count(Root->pLeft) < Count(Root->pRight))
 		{
 			if (Root->pLeft)insert(Root->Data, Root->pLeft);
@@ -410,12 +412,15 @@ void main()
 #endif // DEPTH_CHECK
 
 
-	Tree tree = {89, 55, 34, 21, 13 ,8, 5, 3 };
+#ifdef BALANSE_CHECK
+	Tree tree = { 89, 55, 34, 21, 13 ,8, 5, 3 };
 	tree.tree_print();
 	tree.balance();
 	cout << endl;
 	cout << endl;
 	tree.tree_print();
+#endif // BALANSE_CHECK
+
 
 
 
