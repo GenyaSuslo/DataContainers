@@ -226,7 +226,7 @@ private:
 			cout << " ";
 		}
 		depth_print(Root->pLeft, depth - 1, width);
-		depth_print(Root->pRight, depth-1,width);
+		depth_print(Root->pRight, depth - 1,width);
 	}
 	void tree_print(Element* Root,int width, int depth = 0)const
 	{
@@ -240,7 +240,6 @@ private:
 		
 		tree_print(Root,width/2,depth+1);
 		
-		depth++;
 	}
 
 	void balance(Element* Root)
